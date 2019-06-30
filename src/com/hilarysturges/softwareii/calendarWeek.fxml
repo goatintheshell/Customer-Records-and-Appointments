@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: A4C3BA; -fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 1;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="com.hilarysturges.softwareii.CalendarWeekController">
+   <children>
+      <Hyperlink layoutX="396.0" layoutY="351.0" onAction="#returnToMain" text="Return to Main Screen">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="14.0" layoutY="351.0" onAction="#viewByMonth" text="View by Month">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>

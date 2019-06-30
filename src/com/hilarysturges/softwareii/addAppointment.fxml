@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: A4C3BA; -fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 1;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="com.hilarysturges.softwareii.AddAppointmentController">
+   <children>
+      <Hyperlink layoutX="323.0" layoutY="351.0" onAction="#returnToAppointment" text="Return to Appointments Screen">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Hyperlink>
+      <HBox layoutX="7.0" layoutY="7.0" prefHeight="343.0" prefWidth="586.0">
+         <children>
+            <VBox prefHeight="338.0" prefWidth="292.0" spacing="10.0">
+               <children>
+                  <Label text="Add Appointment">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Customer Name" />
+                  <TextField fx:id="customerNameField" promptText="Bob Smith" />
+                  <Label text="Title" />
+                  <TextField promptText="Meeting with Bob" />
+                  <Label text="Type" />
+                  <TextField promptText="Presentation" />
+                  <Label text="Contact" />
+                  <TextField promptText="Nancy" />
+                  <Label text="Description" />
+                  <TextField promptText="To go over sales stats" />
+               </children>
+            </VBox>
+            <VBox prefHeight="338.0" prefWidth="276.0" spacing="10.0">
+               <children>
+                  <Label />
+                  <Label text="URL" />
+                  <TextField promptText="www.meeting.com/1234" />
+                  <Label text="Location" />
+                  <TextField promptText="Conference Room 4" />
+                  <Label text="Start Time" />
+                  <DatePicker />
+                  <Label text="End Time" />
+                  <DatePicker />
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

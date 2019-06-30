@@ -1,0 +1,104 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.hilarysturges.softwareii;
+
+import static com.hilarysturges.softwareii.CustomerRecordsController.testCustomers;
+import static com.hilarysturges.softwareii.CustomerRecordsController.testCustomers;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
+
+/**
+ * FXML Controller class
+ *
+ * @author Hilary
+ */
+public class AppointmentsController implements Initializable {
+    
+    @FXML private TableView<Appointment> tableViewAppts;
+    @FXML private TableColumn<Appointment, Integer> apptId;
+    @FXML private TableColumn<Appointment, Integer> customerId;
+    @FXML private TableColumn<Appointment, Integer> userId;
+    @FXML private TableColumn<Appointment, String> title;
+    @FXML private TableColumn<Appointment, String> description;
+    @FXML private TableColumn<Appointment, String> location;
+    @FXML private TableColumn<Appointment, String> contact;
+    @FXML private TableColumn<Appointment, String> type;
+    @FXML private TableColumn<Appointment, String> url1;
+    @FXML private TableColumn<Appointment, Timestamp> start;
+    @FXML private TableColumn<Appointment, Timestamp> end;
+    @FXML private TableColumn<Appointment, Date> created;
+    @FXML private TableColumn<Appointment, String> createdBy;
+    @FXML private TableColumn<Appointment, Date> updated;
+    @FXML private TableColumn<Appointment, String> updatedBy;
+    
+    static ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+    
+    public void addButtonPushed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("addAppointment.fxml"));
+        Parent addApptParent = loader.load();
+        Scene addApptScene = new Scene(addApptParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(addApptScene);
+        window.show();
+    }
+
+    public void returnToMain(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("mainscreen.fxml"));
+        Parent mainParent = loader.load();
+        Scene mainScene = new Scene(mainParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(mainScene);
+        window.show();
+    }
+    
+    public static ObservableList<Appointment> addAppointments() {
+
+        return appointments;
+        }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        apptId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getApptID()).asObject());
+        customerId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCustomerID()).asObject());
+        userId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getUserID()).asObject());
+        title.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getTitle()));
+        description.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getDescription()));
+        location.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getLocation()));
+        contact.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getContact()));
+        type.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getType()));
+        url1.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUrl()));
+        start.setCellValueFactory(new PropertyValueFactory<Appointment, Timestamp>("start"));
+        end.setCellValueFactory(new PropertyValueFactory<Appointment, Timestamp>("end"));
+        created.setCellValueFactory(new PropertyValueFactory<Appointment, Date>("created"));
+        createdBy.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCreatedBy()));
+        updated.setCellValueFactory(new PropertyValueFactory<Appointment, Date>("updated"));
+        updatedBy.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUpdatedBy()));
+        title.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableViewAppts.setItems(addAppointments());
+    }    
+    
+}
