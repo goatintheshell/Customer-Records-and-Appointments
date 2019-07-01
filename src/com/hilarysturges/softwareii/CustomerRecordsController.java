@@ -54,7 +54,7 @@ public class CustomerRecordsController implements Initializable {
     
     static ObservableList<Customer> testCustomers = FXCollections.observableArrayList();
     
-    public void deletePartButtonPushed() {
+    public void deleteButtonPushed() {
         int customerId = 0;
         int addressId = 0;
         

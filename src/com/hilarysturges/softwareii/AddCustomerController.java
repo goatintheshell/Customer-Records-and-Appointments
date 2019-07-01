@@ -56,6 +56,16 @@ public class AddCustomerController implements Initializable {
     
     public void addButtonPushed(ActionEvent event) throws IOException {
         //add to database
+        int cityId = 1;
+            if (cityField.getText().equalsIgnoreCase("Los Angeles")) {
+                cityId = 2;
+            } if (cityField.getText().equalsIgnoreCase("Toronto")) {
+                cityId = 3;
+            } if (cityField.getText().equalsIgnoreCase("Vancouver")) {
+                cityId = 4;
+            } if (cityField.getText().equalsIgnoreCase("Oslo")) {
+                cityId = 5;
+            }
         int customerId = 0;
         int addressId = 0;
         int activeBoolean = 0;
@@ -69,7 +79,7 @@ public class AddCustomerController implements Initializable {
         PreparedStatement prepAdd = conn.prepareStatement(addAddress);
         prepAdd.setString(1,address1Field.getText());
         prepAdd.setString(2,address2Field.getText());
-        prepAdd.setInt(3,1);
+        prepAdd.setInt(3,cityId);
         prepAdd.setString(4,postalCodeField.getText());
         prepAdd.setString(5,phoneField.getText());
         prepAdd.setDate(6,startDate);

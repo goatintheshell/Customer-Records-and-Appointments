@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -27,29 +28,31 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label text="Customer Name" />
-                  <TextField fx:id="customerNameField" promptText="Bob Smith" />
+                  <Label text="Customer ID" />
+                  <TextField fx:id="customerIdField" promptText="12" />
                   <Label text="Title" />
-                  <TextField promptText="Meeting with Bob" />
+                  <TextField fx:id="titleField" promptText="Meeting with Bob" />
                   <Label text="Type" />
-                  <TextField promptText="Presentation" />
+                  <TextField fx:id="typeField" promptText="Presentation" />
                   <Label text="Contact" />
-                  <TextField promptText="Nancy" />
+                  <TextField fx:id="contactField" promptText="Nancy" />
                   <Label text="Description" />
-                  <TextField promptText="To go over sales stats" />
+                  <TextField fx:id="descField" promptText="To go over sales stats" />
                </children>
             </VBox>
             <VBox prefHeight="338.0" prefWidth="276.0" spacing="10.0">
                <children>
                   <Label />
                   <Label text="URL" />
-                  <TextField promptText="www.meeting.com/1234" />
+                  <TextField fx:id="urlField" promptText="www.meeting.com/1234" />
                   <Label text="Location" />
-                  <TextField promptText="Conference Room 4" />
+                  <TextField fx:id="locField" promptText="Conference Room 4" />
+                  <Label text="Scheduled Date" />
+                  <DatePicker fx:id="datePicker" />
                   <Label text="Start Time" />
-                  <DatePicker />
+                  <TextField fx:id="startField" promptText="hh:mm:ss" />
                   <Label text="End Time" />
-                  <DatePicker />
+                  <TextField fx:id="endField" promptText="hh:mm:ss" />
                </children>
                <padding>
                   <Insets top="10.0" />
@@ -57,5 +60,6 @@
             </VBox>
          </children>
       </HBox>
+      <Button layoutX="67.0" layoutY="360.0" mnemonicParsing="false" onAction="#addButtonPushed" text="Add Appointment" />
    </children>
 </AnchorPane>

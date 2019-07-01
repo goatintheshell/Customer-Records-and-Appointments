@@ -50,7 +50,7 @@
                   </StackPane>
                   <StackPane>
                      <children>
-                        <Button mnemonicParsing="false" onAction="#deletePartButtonPushed" prefWidth="75.0" text="Delete" />
+                        <Button mnemonicParsing="false" onAction="#deleteButtonPushed" prefWidth="75.0" text="Delete" />
                      </children>
                   </StackPane>
                </children>
