@@ -38,11 +38,15 @@ public class CalendarMonthController implements Initializable {
 
     
     public void monthSelected(ActionEvent event) throws IOException {
-        calendar.getChildren().removeAll(dateList);
-        calendar.getChildren().removeAll(titleList);
-        calendar.getChildren().removeAll(timeList);
+        Node[] node = new Node[42];
+        for (int i = 0 ; i < 42 ; i++) {
+            node[i] = calendar.getChildren().get(i);
+        }   calendar.getChildren().clear();
+        for (int i=0 ; i < 42 ; i++) {
+            calendar.getChildren().add(0,node[i]);
+        }
         //sets up January calendar
-        if (this.monthSelector.getValue() == "January") {
+        if (this.monthSelector.getValue().equals("January")) {
             int j=0; int k=0; int l=0; int m=0;
             for (int i=1; i<32 ; i++) {
                 dateList[i] = new Label(Integer.toString(i));
@@ -92,7 +96,7 @@ public class CalendarMonthController implements Initializable {
                 }
             }
         //Sets up February calendar
-        if (this.monthSelector.getValue() == "February") {
+        if (this.monthSelector.getValue().equals("February")) {
             int j=0; int k=0; int l=0; int m=0;
             for (int i=1; i<29 ; i++) {
                 dateList[i] = new Label(Integer.toString(i));
@@ -142,7 +146,7 @@ public class CalendarMonthController implements Initializable {
                 }
         }
         //sets up March calendar
-        if (this.monthSelector.getValue() == "March") {
+        if (this.monthSelector.getValue().equals("March")) {
             int j=0; int k=0; int l=0; int m=0;
             for (int i=1; i<32 ; i++) {
                 dateList[i] = new Label(Integer.toString(i));
@@ -192,7 +196,7 @@ public class CalendarMonthController implements Initializable {
                 }
         }
         //sets up April calendar
-        if (this.monthSelector.getValue() == "April") {
+        if (this.monthSelector.getValue().equals("April")) {
             int j=0; int k=0; int l=0; int m=0;
             for (int i=0; i<30 ; i++) {
                 dateList[i] = new Label(Integer.toString(i+1));
@@ -242,7 +246,7 @@ public class CalendarMonthController implements Initializable {
                 }
         }
         //sets up May calendar
-        if (this.monthSelector.getValue() == "May") {
+        if (this.monthSelector.getValue().equals("May")) {
             int j=0; int k=0; int l=0; int m=0;
             for (int i=1; i<32 ; i++) {
                 dateList[i] = new Label(Integer.toString(i));
@@ -292,9 +296,9 @@ public class CalendarMonthController implements Initializable {
                 }
         }
         //sets up June calendar
-        if (this.monthSelector.getValue() == "June") {
+        if (this.monthSelector.getValue().equals("June")) {
             int j=0; int k=0; int l=0; int m=0;
-            for (int i=1; i<32 ; i++) {
+            for (int i=1; i<31 ; i++) {
                 dateList[i] = new Label(Integer.toString(i));
                 if (i<3) {
                     GridPane.setConstraints(dateList[i],i+4,2);
@@ -342,7 +346,7 @@ public class CalendarMonthController implements Initializable {
                 }
         }
         //sets up July calendar
-        if (this.monthSelector.getValue() == "July") {
+        if (this.monthSelector.getValue().equals("July")) {
             int j=0; int k=0; int l=0; int m=0;
             for (int i=0; i<31 ; i++) {
                 dateList[i] = new Label(Integer.toString(i+1));
@@ -392,7 +396,7 @@ public class CalendarMonthController implements Initializable {
                 }
         }
         //Sets up August calendar
-        if (this.monthSelector.getValue() == "August") {
+        if (this.monthSelector.getValue().equals("August")) {
             int j=0; int k=0; int l=0; int m=0;
             for (int i=1; i<32 ; i++) {
                 dateList[i] = new Label(Integer.toString(i));
@@ -442,7 +446,7 @@ public class CalendarMonthController implements Initializable {
                 }
         }
         //sets up September calendar
-        if (this.monthSelector.getValue() == "September") {
+        if (this.monthSelector.getValue().equals("September")) {
             int j=0; int k=0; int l=0; int m=1;
             for (int i=1; i<31 ; i++) {
                 dateList[i] = new Label(Integer.toString(i));
@@ -496,7 +500,7 @@ public class CalendarMonthController implements Initializable {
                 }
         }
         //sets up October calendar
-        if (this.monthSelector.getValue() == "October") {
+        if (this.monthSelector.getValue().equals("October")) {
             int j=0; int k=0; int l=0; int m=0;
             for (int i=1; i<32 ; i++) {
                 dateList[i] = new Label(Integer.toString(i));
@@ -546,7 +550,7 @@ public class CalendarMonthController implements Initializable {
                 }
         }
         //sets up November calendar
-        if (this.monthSelector.getValue() == "November") {
+        if (this.monthSelector.getValue().equals("November")) {
             int j=0; int k=0; int l=0; int m=0;
             for (int i=1; i<31 ; i++) {
                 dateList[i] = new Label(Integer.toString(i));
@@ -596,7 +600,7 @@ public class CalendarMonthController implements Initializable {
                 }
         }
         //sets up December calendar
-        if (this.monthSelector.getValue() == "December") {
+        if (this.monthSelector.getValue().equals("December")) {
             int j=0; int k=0; int l=0; int m=2;
             for (int i=1; i<32 ; i++) {
                 dateList[i] = new Label(Integer.toString(i));

@@ -69,31 +69,6 @@ try {
             launch(args);
         
        }
-    
-//    public void setUser() throws Exception {
-//        Connection conn = null;
-//        try {
-//        String query = "SELECT * FROM user";
-//        Statement st = conn.createStatement();
-//        ResultSet rs = st.executeQuery(query);
-//        while (rs.next()) {
-//            String username = rs.getString("userName");
-//            String password = rs.getString("password");
-//            
-//            User test = new User(Locale.getDefault().toString(),rs.getString("username"),rs.getString("password"));
-//            System.out.print(test + "\n");
-//            System.out.format("%s, %s\n",username, password); 
-//            
-//            FXMLLoader loader = new FXMLLoader();
-//            LoginController controller = loader.getController();
-//            controller.createTestUser(test);
-//        }
-//            
-//         } catch (Exception e) {
-//             System.out.println("You done goofed.");
-//             System.err.println(e.getMessage());
-//         }
-//    }
     }
     
 

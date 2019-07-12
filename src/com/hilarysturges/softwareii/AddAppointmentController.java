@@ -78,8 +78,8 @@ public class AddAppointmentController implements Initializable {
         prepAdd.setString(6,contactField.getText());
         prepAdd.setString(7,typeField.getText());
         prepAdd.setString(8,urlField.getText());
-        prepAdd.setDate(9,startDate);
-        prepAdd.setDate(10,startDate);
+        prepAdd.setTimestamp(9,startTime);
+        prepAdd.setTimestamp(10,endTime);
         prepAdd.setDate(11,startDate);
         prepAdd.setString(12,"test");
         prepAdd.setDate(13,startDate);
