@@ -22,8 +22,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -52,6 +54,62 @@ public class AddAppointmentController implements Initializable {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(apptScene);
         window.show();
+    }
+    
+    public void checkStartBusinessHours(MouseEvent event) throws IOException {
+        if (startField.getText().isEmpty() == false) {
+        Timestamp startTime = Timestamp.valueOf("2019-07-14 " + startField.getText());
+        Timestamp fiveOClock = Timestamp.valueOf("2019-07-14 17:00:00");
+        Timestamp EightOClock = Timestamp.valueOf("2019-07-14 08:00:00");
+        if (startTime.after(fiveOClock)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Outside Business Hours");
+            alert.setHeaderText("Outside Business Hours");
+            alert.setContentText("Start time is after 5PM");
+            alert.showAndWait();
+            }
+        if (startTime.before(EightOClock)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Outside Business Hours");
+            alert.setHeaderText("Outside Business Hours");
+            alert.setContentText("Start time is before 8AM");
+            alert.showAndWait();
+        }
+        } else {
+            Alert emptyAlert = new Alert(Alert.AlertType.INFORMATION);
+            emptyAlert.setTitle("Missing information");
+            emptyAlert.setHeaderText("Start time is missing");
+            emptyAlert.setContentText("Please enter a start time");
+            emptyAlert.showAndWait();
+        }
+    }
+    
+    public void checkEndBusinessHours(MouseEvent event) throws IOException {
+        if (endField.getText().isEmpty() == false) {
+        Timestamp endTime = Timestamp.valueOf("2019-07-14 " + endField.getText());
+        Timestamp fiveOClock = Timestamp.valueOf("2019-07-14 17:00:00");
+        Timestamp EightOClock = Timestamp.valueOf("2019-07-14 08:00:00");
+        if (endTime.after(fiveOClock)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Outside Business Hours");
+            alert.setHeaderText("Outside Business Hours");
+            alert.setContentText("End time is after 5PM");
+            alert.showAndWait();
+            }
+        if (endTime.before(EightOClock)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Outside Business Hours");
+            alert.setHeaderText("Outside Business Hours");
+            alert.setContentText("End time is before 8AM");
+            alert.showAndWait();
+        }
+        } else {
+            Alert emptyAlert = new Alert(Alert.AlertType.INFORMATION);
+            emptyAlert.setTitle("Missing information");
+            emptyAlert.setHeaderText("End time is missing");
+            emptyAlert.setContentText("Please enter an end time");
+            emptyAlert.showAndWait();
+        }
     }
     
     public void addButtonPushed(ActionEvent event) throws IOException {
