@@ -233,7 +233,7 @@ public class CalendarMonthController implements Initializable {
                             GridPane.setValignment(titleList[i], VPos.TOP);
                     int columnIndex;
                     int rowIndex;
-                        for (int n=1 ; n<31 ; n++) {
+                        for (int n=0 ; n<30 ; n++) {
                             if (day.equals(dateList[n].getText())) {
                                 columnIndex = GridPane.getColumnIndex(dateList[n]);
                                 rowIndex = GridPane.getRowIndex(dateList[n]);
@@ -383,7 +383,7 @@ public class CalendarMonthController implements Initializable {
                             GridPane.setValignment(titleList[i], VPos.TOP);
                     int columnIndex;
                     int rowIndex;
-                        for (int n=1 ; n<32 ; n++) {
+                        for (int n=0 ; n<31 ; n++) {
                             if (day.equals(dateList[n].getText())) {
                                 columnIndex = GridPane.getColumnIndex(dateList[n]);
                                 rowIndex = GridPane.getRowIndex(dateList[n]);
@@ -394,7 +394,7 @@ public class CalendarMonthController implements Initializable {
                         }
                     }
                 }
-        }
+            }
         //Sets up August calendar
         if (this.monthSelector.getValue().equals("August")) {
             int j=0; int k=0; int l=0; int m=0;
@@ -444,7 +444,7 @@ public class CalendarMonthController implements Initializable {
                         }
                     }
                 }
-        }
+            }
         //sets up September calendar
         if (this.monthSelector.getValue().equals("September")) {
             int j=0; int k=0; int l=0; int m=1;

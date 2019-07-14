@@ -5,6 +5,7 @@
  */
 package com.hilarysturges.softwareii;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -42,6 +43,19 @@ import javafx.stage.Stage;
 public class MainscreenController implements Initializable {
     
     static int counter;
+    
+    public static void writeOutLogins(User user) {
+        Calendar calendar = Calendar.getInstance();
+        Timestamp curTime = new Timestamp(calendar.getTime().getTime());
+        try {
+            FileWriter file = new FileWriter("logins.txt",true);
+            file.append(System.getProperty("line.separator"));
+            file.write(user.getUsername() + " logged in on " + curTime);
+            file.close();
+        } catch (Exception e) {
+            System.out.println("Error writing file");
+        }
+    }
     
     public static void meetingAlert() {
             FilteredList<Appointment> filteredByTime = new FilteredList<>(AppointmentsController.appointments);

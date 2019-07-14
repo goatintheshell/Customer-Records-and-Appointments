@@ -126,6 +126,7 @@ public class LoginController implements Initializable {
             window.setScene(mainScene);
             window.show();
             MainscreenController.meetingAlert();
+            MainscreenController.writeOutLogins(test);
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             //alert.initModality(Modality.NONE);
