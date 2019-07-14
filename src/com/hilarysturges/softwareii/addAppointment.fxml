@@ -28,7 +28,7 @@
                      </font>
                   </Label>
                   <Label text="Customer ID" />
-                  <TextField fx:id="customerIdField" promptText="12" />
+                  <TextField fx:id="customerIdField" onMouseExited="#checkIdMouse" promptText="12" />
                   <Label text="Title" />
                   <TextField fx:id="titleField" promptText="Meeting with Bob" />
                   <Label text="Type" />
@@ -49,9 +49,9 @@
                   <Label text="Scheduled Date" />
                   <DatePicker fx:id="datePicker" />
                   <Label text="Start Time" />
-                  <TextField fx:id="startField" onMouseExited="#checkStartBusinessHours" promptText="hh:mm:ss" />
+                  <TextField fx:id="startField" onMouseExited="#checkStartMouse" promptText="hh:mm:ss" />
                   <Label text="End Time" />
-                  <TextField fx:id="endField" onMouseExited="#checkEndBusinessHours" promptText="hh:mm:ss" />
+                  <TextField fx:id="endField" onMouseExited="#checkEndMouse" promptText="hh:mm:ss" />
                </children>
                <padding>
                   <Insets top="10.0" />

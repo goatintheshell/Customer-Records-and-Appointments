@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +46,9 @@ public class AddAppointmentController implements Initializable {
     @FXML private DatePicker datePicker;
     @FXML private TextField startField;
     @FXML private TextField endField;
+    
+    Alert finalAlert = new Alert(Alert.AlertType.INFORMATION);
+    String finalMessage = "";
 
     public void returnToAppointment(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -56,7 +60,56 @@ public class AddAppointmentController implements Initializable {
         window.show();
     }
     
-    public void checkStartBusinessHours(MouseEvent event) throws IOException {
+    public void checkIdMouse(MouseEvent event) throws IOException {
+        checkIdIsInt();
+    }
+    
+    public boolean checkIdIsInt() {
+        boolean answer = Pattern.matches("[abcdefghijklmnopqrstuvwxyz]",customerIdField.getText());
+        if (answer == true) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid Customer ID");
+            alert.setHeaderText("Invalid Customer ID");
+            alert.setContentText("Customer ID must be a number");
+            alert.showAndWait();
+        }
+        return answer;
+    }
+    
+    public boolean checkOverlapping() {
+        boolean answer = false;
+        if (datePicker.getValue() != null) {
+        Timestamp newApptStart = Timestamp.valueOf(datePicker.getValue() + " " + startField.getText());
+        Timestamp newApptEnd = Timestamp.valueOf(datePicker.getValue() + " " + endField.getText());
+        Timestamp oldApptStart;
+        Timestamp oldApptEnd;
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              alert.setTitle("Overlapping appointments");
+              alert.setHeaderText("Appointment already scheduled for this time");
+              alert.setContentText("Please alter appointment time");
+        for (int i=0 ; i<AppointmentsController.appointments.size() ; i++) {
+            oldApptStart = AppointmentsController.appointments.get(i).getStart();
+            oldApptEnd = AppointmentsController.appointments.get(i).getEnd();
+            if (newApptStart.before(oldApptEnd) && newApptStart.after(oldApptStart)) {
+                alert.showAndWait();
+                answer = true;
+                }
+            if (newApptEnd.after(oldApptStart) && newApptEnd.before(oldApptEnd)) {
+                alert.showAndWait();
+                answer = true;
+            }
+            }
+        }
+        return answer;
+    }
+    
+    public void checkStartMouse(MouseEvent event) throws IOException {
+        checkStartBusinessHours();
+        checkOverlapping();
+    }
+    
+    public boolean checkStartBusinessHours() {
+        boolean answer = false;
         if (startField.getText().isEmpty() == false) {
         Timestamp startTime = Timestamp.valueOf("2019-07-14 " + startField.getText());
         Timestamp fiveOClock = Timestamp.valueOf("2019-07-14 17:00:00");
@@ -67,6 +120,7 @@ public class AddAppointmentController implements Initializable {
             alert.setHeaderText("Outside Business Hours");
             alert.setContentText("Start time is after 5PM");
             alert.showAndWait();
+            answer = true;
             }
         if (startTime.before(EightOClock)) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -74,6 +128,7 @@ public class AddAppointmentController implements Initializable {
             alert.setHeaderText("Outside Business Hours");
             alert.setContentText("Start time is before 8AM");
             alert.showAndWait();
+            answer = true;
         }
         } else {
             Alert emptyAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -82,9 +137,16 @@ public class AddAppointmentController implements Initializable {
             emptyAlert.setContentText("Please enter a start time");
             emptyAlert.showAndWait();
         }
+        return answer;
     }
     
-    public void checkEndBusinessHours(MouseEvent event) throws IOException {
+    public void checkEndMouse(MouseEvent event) throws IOException {
+        checkEndBusinessHours();
+        checkOverlapping();
+    }
+    
+    public boolean checkEndBusinessHours() {
+        boolean answer = false;
         if (endField.getText().isEmpty() == false) {
         Timestamp endTime = Timestamp.valueOf("2019-07-14 " + endField.getText());
         Timestamp fiveOClock = Timestamp.valueOf("2019-07-14 17:00:00");
@@ -95,6 +157,7 @@ public class AddAppointmentController implements Initializable {
             alert.setHeaderText("Outside Business Hours");
             alert.setContentText("End time is after 5PM");
             alert.showAndWait();
+            answer = true;
             }
         if (endTime.before(EightOClock)) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -102,6 +165,7 @@ public class AddAppointmentController implements Initializable {
             alert.setHeaderText("Outside Business Hours");
             alert.setContentText("End time is before 8AM");
             alert.showAndWait();
+            answer = true;
         }
         } else {
             Alert emptyAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -110,9 +174,55 @@ public class AddAppointmentController implements Initializable {
             emptyAlert.setContentText("Please enter an end time");
             emptyAlert.showAndWait();
         }
+        return answer;
+    }
+    
+    public void checkAllFields() {
+        if (customerIdField.getText().isEmpty()) {
+            finalMessage+="You must enter a customer ID number \n";            
+        } if (titleField.getText().isEmpty()) {
+            finalMessage+="You must enter a title \n";
+        } if (descField.getText().isEmpty()) {
+            finalMessage+="You must enter a description \n";
+        } if (typeField.getText().isEmpty()) {
+            finalMessage+="You must enter a meeting type \n";
+        } if (contactField.getText().isEmpty()) {
+            finalMessage+="You must enter an employee contact \n";
+        } if (urlField.getText().isEmpty()) {
+            finalMessage+="You must enter a meeting URL \n";
+        } if (locField.getText().isEmpty()) {
+            finalMessage+="You must enter a meeting location \n";
+        } if (startField.getText().isEmpty()) {
+            finalMessage+="You must enter a start time \n";
+        } if (endField.getText().isEmpty()) {
+            finalMessage+="You must enter an end time \n";
+        } if (datePicker.getValue() == null) {
+            finalMessage+="You must select a date \n";
+        } if (checkStartBusinessHours() == true) {
+            finalMessage+="Start time must be within business hours \n";
+        } if (checkEndBusinessHours() == true) {
+            finalMessage+="End time must be within business hours \n";
+        } if (checkOverlapping() == true) {
+            finalMessage+="Overlapping appointments, please change time \n";
+        } if (checkIdIsInt() == true) {
+            finalMessage+="Customer ID must be a number \n";
+        }
     }
     
     public void addButtonPushed(ActionEvent event) throws IOException {
+        checkAllFields();
+        if (customerIdField.getText().isEmpty() || titleField.getText().isEmpty() ||
+                descField.getText().isEmpty() || typeField.getText().isEmpty() ||
+                contactField.getText().isEmpty() || urlField.getText().isEmpty() ||
+                locField.getText().isEmpty() || startField.getText().isEmpty() ||
+                endField.getText().isEmpty() || datePicker.getValue() == null) {
+            finalAlert.setTitle("Missing or incorrect information");
+            finalAlert.setHeaderText("You must complete the form");
+            finalAlert.setContentText(finalMessage);
+            finalAlert.showAndWait();
+            System.out.println(finalMessage);
+            finalMessage = "";
+        } else {
         //add to database      
         int appointmentId = 0;
         Timestamp startTime = Timestamp.valueOf(datePicker.getValue() + " " + startField.getText());
@@ -167,6 +277,7 @@ public class AddAppointmentController implements Initializable {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(apptScene);
         window.show();
+        }
     }
     
     @Override
