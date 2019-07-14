@@ -58,6 +58,18 @@ public class AppointmentsController implements Initializable {
     
     static ObservableList<Appointment> appointments = FXCollections.observableArrayList();
     
+    public void editButtonPushed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("editAppointment.fxml"));
+        Parent editParent = loader.load();
+        Scene editScene = new Scene(editParent);
+        EditAppointmentController controller = loader.getController();
+        controller.initData(tableViewAppts.getSelectionModel().getSelectedItem());
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(editScene);
+        window.show();
+    }
+    
     public void deleteButtonPushed() {
         int appointmentId = 0;
 

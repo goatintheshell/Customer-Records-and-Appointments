@@ -1,16 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: A4C3BA; -fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 1;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="com.hilarysturges.softwareii.ReportsController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="1020.0" style="-fx-background-color: A4C3BA; -fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 1;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hilarysturges.softwareii.ReportsController">
    <children>
-      <Hyperlink layoutX="396.0" layoutY="351.0" onAction="#returnToMain" text="Return to Main Screen">
+      <VBox layoutX="22.0" layoutY="21.0" prefHeight="326.0" prefWidth="973.0" spacing="10.0">
+         <children>
+            <StackPane prefWidth="992.0">
+               <children>
+                  <Label text="Appointments">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <TableView fx:id="tableViewAppts" prefHeight="303.0" prefWidth="973.0">
+               <columns>
+                  <TableColumn fx:id="apptId" prefWidth="41.0" text="ID" />
+                  <TableColumn fx:id="customerId" prefWidth="78.0" text="Customer ID" />
+                  <TableColumn fx:id="userId" prefWidth="70.0" text="User ID" />
+                  <TableColumn fx:id="title" prefWidth="37.0" text="Title" />
+                  <TableColumn fx:id="description" prefWidth="91.0" text="Description" />
+                  <TableColumn fx:id="location" prefWidth="75.0" text="Location" />
+                  <TableColumn fx:id="contact" prefWidth="64.0" text="Contact" />
+                  <TableColumn fx:id="type" prefWidth="51.0" text="Type" />
+                  <TableColumn fx:id="url1" prefWidth="57.0" text="URL" />
+                  <TableColumn fx:id="start" prefWidth="37.0" text="Start" />
+                  <TableColumn fx:id="end" prefWidth="42.0" text="End" />
+                  <TableColumn fx:id="created" prefWidth="62.0" text="Created" />
+                  <TableColumn fx:id="createdBy" prefWidth="90.0" text="Created By" />
+                  <TableColumn fx:id="updated" prefWidth="83.0" text="Last Update" />
+                  <TableColumn fx:id="updatedBy" prefWidth="93.0" text="Updated By" />
+               </columns>
+            </TableView>
+            <HBox prefHeight="41.0" prefWidth="973.0" spacing="10.0">
+               <children>
+                  <StackPane />
+                  <StackPane />
+                  <StackPane />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <StackPane layoutX="10.0" layoutY="10.0" prefWidth="992.0" />
+      <Hyperlink layoutX="800.0" layoutY="351.0" onAction="#returnToMain" text="Return to Main Screen">
          <font>
             <Font size="18.0" />
          </font>
       </Hyperlink>
+      <ComboBox fx:id="monthBox" layoutX="22.0" layoutY="347.0" onAction="#monthSelected" prefWidth="150.0" promptText="Month:" />
+      <ComboBox fx:id="userBox" layoutX="198.0" layoutY="347.0" onAction="#userSelected" prefWidth="150.0" promptText="Created By:" />
+      <ComboBox fx:id="typeBox" layoutX="374.0" layoutY="347.0" onAction="#typeSelected" prefWidth="150.0" promptText="Type:" />
    </children>
 </AnchorPane>

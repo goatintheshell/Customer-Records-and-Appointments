@@ -24,9 +24,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -44,6 +47,9 @@ public class AddCustomerController implements Initializable {
     @FXML private TextField cityField;
     @FXML private CheckBox activeCheckBox;
     
+    Alert finalAlert = new Alert(Alert.AlertType.INFORMATION);
+    String finalMessage = "";
+    
     public void returnToCustomer(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("customerRecords.fxml"));
@@ -54,7 +60,88 @@ public class AddCustomerController implements Initializable {
         window.show();
     }
     
+    public void checkNameField(MouseEvent event) throws IOException {
+        if (customerNameField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("You must enter a customer name");
+            alert.showAndWait();
+        }
+    }
+    
+    public void checkAddress1Field(MouseEvent event) throws IOException {
+        if (address1Field.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("You must enter an address line 1");
+            alert.showAndWait();
+        }
+    }
+    
+    public void checkAddress2Field(MouseEvent event) throws IOException {
+        if (address2Field.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("You must enter an address line 2");
+            alert.showAndWait();
+        }
+    }
+    
+    public void checkPostalCodeField(MouseEvent event) throws IOException {
+        if (postalCodeField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("You must enter a postal code");
+            alert.showAndWait();
+        }
+    }
+    
+    public void checkPhoneField(MouseEvent event) throws IOException {
+        if (phoneField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("You must enter a phone number");
+            alert.showAndWait();
+        }
+    }
+    
+    public void checkCityField(MouseEvent event) throws IOException {
+        if (cityField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("You must enter a city");
+            alert.showAndWait();
+        }
+    }
+    
+    public void checkAllFields() {
+        if (customerNameField.getText().isEmpty()) {
+            finalMessage+="You must enter a customer name \n";            
+        } if (address1Field.getText().isEmpty()) {
+            finalMessage+="You must enter an address line 1 \n";
+        } if (address2Field.getText().isEmpty()) {
+            finalMessage+="You must enter an address line 2 \n";
+        } if (postalCodeField.getText().isEmpty()) {
+            finalMessage+="You must enter a postal code \n";
+        } if (phoneField.getText().isEmpty()) {
+            finalMessage+="You must enter a phone number \n";
+        } if (cityField.getText().isEmpty()) {
+            finalMessage+="You must enter a city \n";
+        }
+    }
+    
     public void addButtonPushed(ActionEvent event) throws IOException {
+        checkAllFields();
+        if (customerNameField.getText().isEmpty() || address1Field.getText().isEmpty() ||
+                address2Field.getText().isEmpty() || postalCodeField.getText().isEmpty() ||
+                phoneField.getText().isEmpty() || cityField.getText().isEmpty()) {
+            finalAlert.setTitle("Missing information");
+            finalAlert.setHeaderText("You must complete the form");
+            finalAlert.setContentText(finalMessage);
+            finalAlert.showAndWait();
+            System.out.println(finalMessage);
+            finalMessage = "";
+        } else {
         //add to database
         int cityId = 1;
             if (cityField.getText().equalsIgnoreCase("Los Angeles")) {
@@ -87,26 +174,19 @@ public class AddCustomerController implements Initializable {
         prepAdd.setDate(8,startDate);
         prepAdd.setString(9,"test");
         prepAdd.execute();
-        
          } catch (Exception e) {
              System.out.println("You done goofed.");
              System.err.println(e.getMessage());
          }
         
         try {            
-            
-        
         if (activeCheckBox.isSelected()) {
             activeBoolean = 1;
-        }
-        
-        
-            
+        }            
         Connection conn = DriverManager.getConnection("jdbc:mysql://52.206.157.109:3306/U05xaQ", "U05xaQ", "53688636138");
         String addCustomer = "insert into customer (customerName,addressId,active,createDate,createdBy,lastUpdate,lastUpdateBy)"
                 + "VALUES (?,?,?,?,?,?,?);";
         //get address ID
-        
         String checkAddressId = "select addressId from address order by addressId desc limit 1";
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(checkAddressId);
@@ -138,7 +218,7 @@ public class AddCustomerController implements Initializable {
          }
          
         //add to class
-        CustomerRecordsController.testCustomers.add(new Customer(customerId,customerNameField.getText(),address1Field.getText(),addressId,activeBoolean,startDate,"test",startDate,"test")); 
+        CustomerRecordsController.testCustomers.add(new Customer(customerId,customerNameField.getText(),address1Field.getText(),address2Field.getText(),postalCodeField.getText(),phoneField.getText(),cityField.getText(),addressId,activeBoolean,startDate,"test",startDate,"test")); 
         
         //return to customer screen
         FXMLLoader loader = new FXMLLoader();
@@ -148,6 +228,7 @@ public class AddCustomerController implements Initializable {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(customerScene);
         window.show();
+        }
     }
     
     @Override

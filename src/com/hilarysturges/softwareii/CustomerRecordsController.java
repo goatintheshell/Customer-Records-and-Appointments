@@ -54,6 +54,18 @@ public class CustomerRecordsController implements Initializable {
     
     static ObservableList<Customer> testCustomers = FXCollections.observableArrayList();
     
+    public void editButtonPushed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("editCustomer.fxml"));
+        Parent editParent = loader.load();
+        Scene editScene = new Scene(editParent);
+        EditCustomerController controller = loader.getController();
+        controller.initData(tableViewCustomers.getSelectionModel().getSelectedItem());
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(editScene);
+        window.show();
+    }
+    
     public void deleteButtonPushed() {
         int customerId = 0;
         int addressId = 0;

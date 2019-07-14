@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: A4C3BA; -fx-border-style: solid; -fx-border-color: 000000; -fx-border-width: 1;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="com.hilarysturges.softwareii.AddCustomerController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: A4C3BA; -fx-border-style: solid; -fx-border-color: 000000; -fx-border-width: 1;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hilarysturges.softwareii.AddCustomerController">
    <children>
       <HBox layoutX="17.0" layoutY="13.0" prefHeight="286.0" prefWidth="566.0">
          <children>
@@ -25,22 +24,22 @@
                      </font>
                   </Label>
                   <Label text="Customer Name" />
-                  <TextField fx:id="customerNameField" promptText="Bob Smith" />
+                  <TextField fx:id="customerNameField" onMouseExited="#checkNameField" promptText="Bob Smith" />
                   <Label text="Address Line 1" />
-                  <TextField fx:id="address1Field" promptText="123 Main St" />
+                  <TextField fx:id="address1Field" onMouseExited="#checkAddress1Field" promptText="123 Main St" />
                   <Label text="Address Line 2" />
-                  <TextField fx:id="address2Field" promptText="Suite 200" />
+                  <TextField fx:id="address2Field" onMouseExited="#checkAddress2Field" promptText="Suite 200" />
                   <Label text="Postal Code" />
-                  <TextField fx:id="postalCodeField" promptText="12345" />
+                  <TextField fx:id="postalCodeField" onMouseExited="#checkPostalCodeField" promptText="12345" />
                </children>
             </VBox>
             <VBox prefHeight="338.0" prefWidth="276.0" spacing="10.0">
                <children>
                   <Label />
                   <Label text="City" />
-                  <TextField fx:id="cityField" promptText="New York" />
+                  <TextField fx:id="cityField" onMouseExited="#checkCityField" promptText="New York" />
                   <Label text="Phone Number" />
-                  <TextField fx:id="phoneField" promptText="123-456-7890" />
+                  <TextField fx:id="phoneField" onMouseExited="#checkPhoneField" promptText="123-456-7890" />
                   <StackPane />
                   <CheckBox fx:id="activeCheckBox" mnemonicParsing="false" selected="true" text="Active Customer" />
                </children>

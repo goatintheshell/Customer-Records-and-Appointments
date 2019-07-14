@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="com.hilarysturges.softwareii.EditAppointmentController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="410.0" prefWidth="610.0" style="-fx-background-color: A4C3BA; -fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 1;">
+         <children>
+            <Hyperlink layoutX="323.0" layoutY="351.0" onAction="#returnToAppointment" text="Return to Appointments Screen">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Hyperlink>
+            <HBox layoutX="7.0" layoutY="7.0" prefHeight="343.0" prefWidth="586.0">
+               <children>
+                  <VBox prefHeight="338.0" prefWidth="292.0" spacing="10.0">
+                     <children>
+                        <Label text="Edit Appointment">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Customer ID" />
+                        <TextField fx:id="customerIdField" />
+                        <Label text="Title" />
+                        <TextField fx:id="titleField" />
+                        <Label text="Type" />
+                        <TextField fx:id="typeField" />
+                        <Label text="Contact" />
+                        <TextField fx:id="contactField" />
+                        <Label text="Description" />
+                        <TextField fx:id="descField" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="338.0" prefWidth="276.0" spacing="10.0">
+                     <children>
+                        <Label />
+                        <Label text="URL" />
+                        <TextField fx:id="urlField" />
+                        <Label text="Location" />
+                        <TextField fx:id="locField" />
+                        <Label text="Scheduled Date" />
+                        <DatePicker fx:id="datePicker" />
+                        <Label text="Start Time" />
+                        <TextField fx:id="startField" />
+                        <Label text="End Time" />
+                        <TextField fx:id="endField" />
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button layoutX="67.0" layoutY="360.0" mnemonicParsing="false" onAction="#editButtonPushed" text="Edit Appointment" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

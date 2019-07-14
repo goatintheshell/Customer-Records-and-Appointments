@@ -14,8 +14,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import static java.util.Calendar.HOUR;
+import static java.util.Calendar.MINUTE;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +30,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.stage.Stage;
 
@@ -34,6 +42,30 @@ import javafx.stage.Stage;
 public class MainscreenController implements Initializable {
     
     static int counter;
+    
+    public static void meetingAlert() {
+            FilteredList<Appointment> filteredByTime = new FilteredList<>(AppointmentsController.appointments);
+            filteredByTime.setPredicate(appointment -> {
+                Timestamp time = appointment.getStart();
+                Calendar calendar = Calendar.getInstance();
+                Timestamp curTime  = new Timestamp(calendar.getTime().getTime());
+                long t=curTime.getTime();
+                long p=15*60*1000;
+                long m=60*1000;
+                Timestamp timePlus15 = new Timestamp(t+p);
+                Timestamp timeMinus1 = new Timestamp(t-m);
+               
+                    return time.before(timePlus15) && time.after(timeMinus1);                
+        } ); //trigger alert
+            System.out.println(filteredByTime);
+            if (filteredByTime.isEmpty() == false) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Meeting soon");
+            alert.setHeaderText("You have a meeting in the next 15 minutes");
+            alert.setContentText(filteredByTime.get(0).getTitle());
+            alert.showAndWait();
+            }
+    }
     
     public void logOut(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -90,8 +122,8 @@ public class MainscreenController implements Initializable {
         if (counter == 0) {
             try {
         Connection conn = DriverManager.getConnection("jdbc:mysql://52.206.157.109:3306/U05xaQ", "U05xaQ", "53688636138");
-        String query = "select c.customerId, c.customerName, a.address, c.addressId, c.active, c.createDate, c.createdBy, c.lastUpdate, c.lastUpdateBy "
-                + "from customer c join address a on c.addressID = a.addressID;";
+        String query = "select c.customerId, c.customerName, a.address, a.address2, a.postalCode, a.phone, city.city, c.addressId, c.active, c.createDate, c.createdBy, c.lastUpdate, c.lastUpdateBy "
+                +       "from customer c join address a on c.addressID = a.addressID join city on a.cityId = city.cityId;";
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
         while (rs.next()) {
@@ -99,6 +131,10 @@ public class MainscreenController implements Initializable {
             int ID = rs.getInt("customerId");
             String name = rs.getString("customerName");
             String address = rs.getString("address");
+            String address2 = rs.getString("address2");
+            String postalCode = rs.getString("postalCode");
+            String phone = rs.getString("phone");
+            String city = rs.getString("city");
             int addressId = rs.getInt("addressId");
             int active = rs.getInt("active");
             Date created = rs.getDate("createDate");
@@ -106,7 +142,7 @@ public class MainscreenController implements Initializable {
             Date updated = rs.getDate("lastUpdate");
             String updatedBy = rs.getString("lastUpdateBy");
             
-            CustomerRecordsController.testCustomers.add(new Customer(ID,name,address,addressId,active,created,createdBy,updated,updatedBy)); 
+            CustomerRecordsController.testCustomers.add(new Customer(ID,name,address,address2,postalCode,phone,city,addressId,active,created,createdBy,updated,updatedBy)); 
         }
          } catch (Exception e) {
              System.out.println("You done goofed.");

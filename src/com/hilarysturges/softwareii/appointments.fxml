@@ -52,7 +52,7 @@
                   </StackPane>
                   <StackPane>
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="75.0" text="Edit" />
+                        <Button mnemonicParsing="false" onAction="#editButtonPushed" prefWidth="75.0" text="Edit" />
                      </children>
                   </StackPane>
                   <StackPane>

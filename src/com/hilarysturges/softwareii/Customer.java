@@ -15,6 +15,10 @@ public class Customer {
     private int customerID;
     private String customerName;
     private String address;
+    private String address2;
+    private String postalCode;
+    private String phone;
+    private String city;
     private int addressId;
     private int active;
     private Date created;
@@ -22,10 +26,14 @@ public class Customer {
     private Date updated;
     private String updatedBy;
 
-    public Customer(int customerID, String customerName, String address, int addressId, int active, Date created, String createdBy, Date updated, String updatedBy) {
+    public Customer(int customerID, String customerName, String address, String address2, String postalCode, String phone, String city, int addressId, int active, Date created, String createdBy, Date updated, String updatedBy) {
         this.customerID = customerID;
         this.customerName = customerName;
         this.address = address;
+        this.address2 = address2;
+        this.postalCode = postalCode;
+        this.phone = phone;
+        this.city = city;
         this.addressId = addressId;
         this.active = active;
         this.created = created;
@@ -104,6 +112,38 @@ public class Customer {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public String getAddress2() {
+        return address2;
+    }
+
+    public void setAddress2(String address2) {
+        this.address2 = address2;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
     
     
