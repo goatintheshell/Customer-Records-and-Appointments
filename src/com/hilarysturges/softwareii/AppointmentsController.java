@@ -121,6 +121,10 @@ public class AppointmentsController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //I used the following lambda expression because
+        //it is a more readable way of assigning cellData
+        //it assigns each instance of Appointment.getApptID
+        //to a cell
         apptId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getApptID()).asObject());
         customerId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCustomerID()).asObject());
         userId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getUserID()).asObject());
@@ -130,11 +134,11 @@ public class AppointmentsController implements Initializable {
         contact.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getContact()));
         type.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getType()));
         url1.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUrl()));
-        start.setCellValueFactory(new PropertyValueFactory<Appointment, Timestamp>("start"));
-        end.setCellValueFactory(new PropertyValueFactory<Appointment, Timestamp>("end"));
-        created.setCellValueFactory(new PropertyValueFactory<Appointment, Date>("created"));
+        start.setCellValueFactory(new PropertyValueFactory<>("start"));
+        end.setCellValueFactory(new PropertyValueFactory<>("end"));
+        created.setCellValueFactory(new PropertyValueFactory<>("created"));
         createdBy.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCreatedBy()));
-        updated.setCellValueFactory(new PropertyValueFactory<Appointment, Date>("updated"));
+        updated.setCellValueFactory(new PropertyValueFactory<>("updated"));
         updatedBy.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUpdatedBy()));
         title.setCellFactory(TextFieldTableCell.forTableColumn());
         tableViewAppts.setItems(addAppointments());

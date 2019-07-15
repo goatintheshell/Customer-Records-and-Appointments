@@ -139,7 +139,6 @@ public class AddCustomerController implements Initializable {
             finalAlert.setHeaderText("You must complete the form");
             finalAlert.setContentText(finalMessage);
             finalAlert.showAndWait();
-            System.out.println(finalMessage);
             finalMessage = "";
         } else {
         //add to database

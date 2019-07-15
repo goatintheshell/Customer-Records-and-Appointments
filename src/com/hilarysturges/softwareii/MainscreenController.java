@@ -58,6 +58,11 @@ public class MainscreenController implements Initializable {
     }
     
     public static void meetingAlert() {
+        //I used a lambda for this because rather than
+        //using a for loop or creating an anonymous class
+        //I am able to iterate through each appointment
+        //and determine if it should be added to the
+        //filtered list.
             FilteredList<Appointment> filteredByTime = new FilteredList<>(AppointmentsController.appointments);
             filteredByTime.setPredicate(appointment -> {
                 Timestamp time = appointment.getStart();

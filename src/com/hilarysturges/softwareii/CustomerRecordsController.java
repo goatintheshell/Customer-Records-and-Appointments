@@ -134,9 +134,9 @@ public class CustomerRecordsController implements Initializable {
         name.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCustomerName()));
         address.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAddress()));
         active.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getActive()).asObject());
-        created.setCellValueFactory(new PropertyValueFactory<Customer, Date>("created"));
+        created.setCellValueFactory(new PropertyValueFactory<>("created"));
         createdBy.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCreatedBy()));
-        lastUpdated.setCellValueFactory(new PropertyValueFactory<Customer, Date>("updated"));
+        lastUpdated.setCellValueFactory(new PropertyValueFactory<>("updated"));
         updatedBy.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUpdatedBy()));
         name.setCellFactory(TextFieldTableCell.forTableColumn());
         tableViewCustomers.setItems(testCustomers());
