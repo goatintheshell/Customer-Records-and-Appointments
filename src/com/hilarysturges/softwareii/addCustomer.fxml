@@ -30,7 +30,7 @@
                   <Label text="Address Line 2" />
                   <TextField fx:id="address2Field" onMouseExited="#checkAddress2Field" promptText="Suite 200" />
                   <Label text="Postal Code" />
-                  <TextField fx:id="postalCodeField" onMouseExited="#checkPostalCodeField" promptText="12345" />
+                  <TextField fx:id="postalCodeField" onMouseExited="#checkPostalCodeMouse" promptText="12345" />
                </children>
             </VBox>
             <VBox prefHeight="338.0" prefWidth="276.0" spacing="10.0">
@@ -39,7 +39,7 @@
                   <Label text="City" />
                   <TextField fx:id="cityField" onMouseExited="#checkCityField" promptText="New York" />
                   <Label text="Phone Number" />
-                  <TextField fx:id="phoneField" onMouseExited="#checkPhoneField" promptText="123-456-7890" />
+                  <TextField fx:id="phoneField" onMouseExited="#checkPhoneMouse" promptText="123-456-7890" />
                   <StackPane />
                   <CheckBox fx:id="activeCheckBox" mnemonicParsing="false" selected="true" text="Active Customer" />
                </children>

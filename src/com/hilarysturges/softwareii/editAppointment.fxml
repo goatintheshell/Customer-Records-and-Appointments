@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="com.hilarysturges.softwareii.EditAppointmentController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hilarysturges.softwareii.EditAppointmentController">
    <children>
       <AnchorPane id="AnchorPane" prefHeight="410.0" prefWidth="610.0" style="-fx-background-color: A4C3BA; -fx-border-color: 000000; -fx-border-style: solid; -fx-border-width: 1;">
          <children>
@@ -31,7 +30,7 @@
                            </font>
                         </Label>
                         <Label text="Customer ID" />
-                        <TextField fx:id="customerIdField" />
+                        <TextField fx:id="customerIdField" onMouseDragExited="#checkIdMouse" />
                         <Label text="Title" />
                         <TextField fx:id="titleField" />
                         <Label text="Type" />
@@ -52,9 +51,9 @@
                         <Label text="Scheduled Date" />
                         <DatePicker fx:id="datePicker" />
                         <Label text="Start Time" />
-                        <TextField fx:id="startField" />
+                        <TextField fx:id="startField" onMouseDragExited="#checkStartMouse" />
                         <Label text="End Time" />
-                        <TextField fx:id="endField" />
+                        <TextField fx:id="endField" onMouseDragExited="#checkEndMouse" />
                      </children>
                      <padding>
                         <Insets top="10.0" />

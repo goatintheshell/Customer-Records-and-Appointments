@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="com.hilarysturges.softwareii.EditCustomerController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hilarysturges.softwareii.EditCustomerController">
    <children>
       <AnchorPane id="AnchorPane" prefHeight="410.0" prefWidth="610.0" style="-fx-background-color: A4C3BA; -fx-border-style: solid; -fx-border-color: 000000; -fx-border-width: 1;">
          <children>
@@ -27,22 +26,22 @@
                            </font>
                         </Label>
                         <Label text="Customer Name" />
-                        <TextField fx:id="customerNameField" />
+                        <TextField fx:id="customerNameField" onMouseDragExited="#checkNameField" />
                         <Label text="Address Line 1" />
-                        <TextField fx:id="address1Field" />
+                        <TextField fx:id="address1Field" onMouseDragExited="#checkAddress1Field" />
                         <Label text="Address Line 2" />
-                        <TextField fx:id="address2Field" />
+                        <TextField fx:id="address2Field" onMouseDragExited="#checkAddress2Field" />
                         <Label text="Postal Code" />
-                        <TextField fx:id="postalCodeField" />
+                        <TextField fx:id="postalCodeField" onMouseDragExited="#checkPostalCodeMouse" />
                      </children>
                   </VBox>
                   <VBox prefHeight="338.0" prefWidth="276.0" spacing="10.0">
                      <children>
                         <Label />
                         <Label text="City" />
-                        <TextField fx:id="cityField" />
+                        <TextField fx:id="cityField" onMouseDragExited="#checkCityField" />
                         <Label text="Phone Number" />
-                        <TextField fx:id="phoneField" />
+                        <TextField fx:id="phoneField" onMouseDragExited="#checkPhoneMouse" />
                         <StackPane />
                         <CheckBox fx:id="activeCheckBox" mnemonicParsing="false" selected="true" text="Active Customer" />
                      </children>

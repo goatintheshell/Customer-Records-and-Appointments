@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,8 +22,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -41,7 +44,135 @@ public class EditCustomerController implements Initializable {
     @FXML private CheckBox activeCheckBox;
     private Customer selectedCustomer;
     
+    Alert finalAlert = new Alert(Alert.AlertType.INFORMATION);
+    String finalMessage = "";
+    
+    public void checkPostalCodeMouse(MouseEvent event) throws IOException {
+        checkPostalCode();
+        checkPostalCodeField();
+    }
+    
+    public boolean checkPostalCode() {
+        boolean answer = Pattern.matches("[abcdefghijklmnopqrstuvwxyz]",postalCodeField.getText());
+        if (answer == true) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Incorrect Information");
+            alert.setHeaderText("Phone number must be a number");
+            alert.setContentText("Please enter a number");
+            alert.showAndWait();
+        }
+        return answer;
+    }
+    
+    public void checkPhoneMouse(MouseEvent event) throws IOException {
+        checkPhoneNumber();
+        checkPhoneField();
+    }
+    
+    public boolean checkPhoneNumber() {
+        boolean answer = Pattern.matches("[abcdefghijklmnopqrstuvwxyz]",phoneField.getText());
+        if (answer == true) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Incorrect Information");
+            alert.setHeaderText("Phone number must be a number");
+            alert.setContentText("Please enter a number");
+            alert.showAndWait();
+        }
+        return answer;
+    }
+    
+    public void checkNameField(MouseEvent event) throws IOException {
+        if (customerNameField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("You must enter a customer name");
+            alert.showAndWait();
+        }
+    }
+    
+    public void checkAddress1Field(MouseEvent event) throws IOException {
+        if (address1Field.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("You must enter an address line 1");
+            alert.showAndWait();
+        }
+    }
+    
+    public void checkAddress2Field(MouseEvent event) throws IOException {
+        if (address2Field.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("You must enter an address line 2");
+            alert.showAndWait();
+        }
+    }
+    
+    public boolean checkPostalCodeField() {
+        boolean answer = false;
+        if (postalCodeField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("You must enter a postal code");
+            alert.showAndWait();
+            answer = true;
+        }
+        return answer;
+    }
+    
+    public boolean checkPhoneField() {
+        boolean answer = false;
+        if (phoneField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("You must enter a phone number");
+            alert.showAndWait();
+            answer = true;
+        }
+        return answer;
+    }
+    
+    public void checkCityField(MouseEvent event) throws IOException {
+        if (cityField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("You must enter a city");
+            alert.showAndWait();
+        }
+    }
+    
+    public void checkAllFields() {
+        if (customerNameField.getText().isEmpty()) {
+            finalMessage+="You must enter a customer name \n";            
+        } if (address1Field.getText().isEmpty()) {
+            finalMessage+="You must enter an address line 1 \n";
+        } if (address2Field.getText().isEmpty()) {
+            finalMessage+="You must enter an address line 2 \n";
+        } if (postalCodeField.getText().isEmpty()) {
+            finalMessage+="You must enter a postal code \n";
+        } if (phoneField.getText().isEmpty()) {
+            finalMessage+="You must enter a phone number \n";
+        } if (cityField.getText().isEmpty()) {
+            finalMessage+="You must enter a city \n";
+        } if (checkPhoneNumber() == true) {
+            finalMessage+="Phone number must be a number \n";
+        } if (checkPostalCode() == true) {
+            finalMessage+="Postal code must be a number \n";
+        }
+    }
+    
     public void saveButtonPushed(ActionEvent event) throws IOException {
+        checkAllFields();
+        if (customerNameField.getText().isEmpty() || address1Field.getText().isEmpty() ||
+                address2Field.getText().isEmpty() || postalCodeField.getText().isEmpty() ||
+                phoneField.getText().isEmpty() || cityField.getText().isEmpty() ||
+                checkPhoneNumber() == true || checkPostalCode() == true) {
+            finalAlert.setTitle("Missing information");
+            finalAlert.setHeaderText("You must complete the form");
+            finalAlert.setContentText(finalMessage);
+            finalAlert.showAndWait();
+            finalMessage = "";
+        } else {
         //update database
         int cityId = 1;
             if (cityField.getText().equalsIgnoreCase("Los Angeles")) {
@@ -109,6 +240,7 @@ public class EditCustomerController implements Initializable {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(customerScene);
         window.show();
+        }
     }
     
     public void returnToCustomer(ActionEvent event) throws IOException {

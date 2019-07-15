@@ -215,7 +215,9 @@ public class AddAppointmentController implements Initializable {
                 descField.getText().isEmpty() || typeField.getText().isEmpty() ||
                 contactField.getText().isEmpty() || urlField.getText().isEmpty() ||
                 locField.getText().isEmpty() || startField.getText().isEmpty() ||
-                endField.getText().isEmpty() || datePicker.getValue() == null) {
+                endField.getText().isEmpty() || datePicker.getValue() == null ||
+                checkIdIsInt() == true || checkStartBusinessHours() == true ||
+                checkEndBusinessHours() == true || checkOverlapping() == true) {
             finalAlert.setTitle("Missing or incorrect information");
             finalAlert.setHeaderText("You must complete the form");
             finalAlert.setContentText(finalMessage);

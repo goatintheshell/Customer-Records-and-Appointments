@@ -17,6 +17,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,6 +61,40 @@ public class AddCustomerController implements Initializable {
         window.show();
     }
     
+    public void checkPostalCodeMouse(MouseEvent event) throws IOException {
+        checkPostalCode();
+        checkPostalCodeField();
+    }
+    
+    public boolean checkPostalCode() {
+        boolean answer = Pattern.matches("[abcdefghijklmnopqrstuvwxyz]",postalCodeField.getText());
+        if (answer == true) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Incorrect Information");
+            alert.setHeaderText("Phone number must be a number");
+            alert.setContentText("Please enter a number");
+            alert.showAndWait();
+        }
+        return answer;
+    }
+    
+    public void checkPhoneMouse(MouseEvent event) throws IOException {
+        checkPhoneNumber();
+        checkPhoneField();
+    }
+    
+    public boolean checkPhoneNumber() {
+        boolean answer = Pattern.matches("[abcdefghijklmnopqrstuvwxyz]",phoneField.getText());
+        if (answer == true) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Incorrect Information");
+            alert.setHeaderText("Phone number must be a number");
+            alert.setContentText("Please enter a number");
+            alert.showAndWait();
+        }
+        return answer;
+    }
+    
     public void checkNameField(MouseEvent event) throws IOException {
         if (customerNameField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -87,22 +122,28 @@ public class AddCustomerController implements Initializable {
         }
     }
     
-    public void checkPostalCodeField(MouseEvent event) throws IOException {
+    public boolean checkPostalCodeField() {
+        boolean answer = false;
         if (postalCodeField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Missing information");
             alert.setHeaderText("You must enter a postal code");
             alert.showAndWait();
+            answer = true;
         }
+        return answer;
     }
     
-    public void checkPhoneField(MouseEvent event) throws IOException {
+    public boolean checkPhoneField() {
+        boolean answer = false;
         if (phoneField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Missing information");
             alert.setHeaderText("You must enter a phone number");
             alert.showAndWait();
+            answer = true;
         }
+        return answer;
     }
     
     public void checkCityField(MouseEvent event) throws IOException {
@@ -127,6 +168,10 @@ public class AddCustomerController implements Initializable {
             finalMessage+="You must enter a phone number \n";
         } if (cityField.getText().isEmpty()) {
             finalMessage+="You must enter a city \n";
+        } if (checkPhoneNumber() == true) {
+            finalMessage+="Phone number must be a number \n";
+        } if (checkPostalCode() == true) {
+            finalMessage+="Postal code must be a number \n";
         }
     }
     
@@ -134,7 +179,8 @@ public class AddCustomerController implements Initializable {
         checkAllFields();
         if (customerNameField.getText().isEmpty() || address1Field.getText().isEmpty() ||
                 address2Field.getText().isEmpty() || postalCodeField.getText().isEmpty() ||
-                phoneField.getText().isEmpty() || cityField.getText().isEmpty()) {
+                phoneField.getText().isEmpty() || cityField.getText().isEmpty() ||
+                checkPhoneNumber() == true || checkPostalCode() == true) {
             finalAlert.setTitle("Missing information");
             finalAlert.setHeaderText("You must complete the form");
             finalAlert.setContentText(finalMessage);
